@@ -21,7 +21,7 @@ public class ServiceExceptionHelpers {
     }
 
     public void serverHandlerNotFoundException(UserEntity user){
-        if(userRepository.findUserEntityByAndUsername(user.getUsername()).isPresent()) {
+        if(userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new NotFoundException
                     ("Пользователь з таким именем: " + user.getUsername() + " уже есть, повтори еще раз");
         }
