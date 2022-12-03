@@ -1,6 +1,7 @@
 package com.vladik.rest.api.service;
 
 import com.vladik.rest.api.exception.exception.NotFoundException;
+import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.TodoEntity;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.model.TodoModel;
@@ -14,20 +15,20 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
     private final UserRepository userRepository;
+    private final ServiceExceptionHelpers serviceExceptionHelpers;
 
     public TodoService(TodoRepository todoRepository,
-                       UserRepository userRepository) {
+                       UserRepository userRepository,
+                       ServiceExceptionHelpers serviceExceptionHelpers) {
         this.todoRepository = todoRepository;
         this.userRepository = userRepository;
+        this.serviceExceptionHelpers = serviceExceptionHelpers;
     }
-
 
     public TodoModel createTodo(Long id, TodoEntity todoEntity){
         UserEntity user = userRepository.getReferenceById(id);
 
-        if (todoRepository.findByTitle(todoEntity.getTitle()).isPresent()){
-            throw new NotFoundException("Запись уже записанна :" + todoEntity.getTitle());
-        }
+        serviceExceptionHelpers.serverHandlerNotFrondExceptionTitle(todoEntity);
 
         todoEntity.setUser(user);
 
