@@ -12,6 +12,7 @@ public class TodoEntity {
     private Long id;
     @NotBlank
     private String title;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

@@ -25,7 +25,7 @@ public class TodoService {
     public TodoModel createTodo(Long id, TodoEntity todoEntity){
         UserEntity user = userRepository.getReferenceById(id);
 
-        if (todoRepository.findTodoEntityByAndTodo(todoEntity.getTitle()).isPresent()){
+        if (todoRepository.findByTitle(todoEntity.getTitle()).isPresent()){
             throw new NotFoundException("Запись уже записанна :" + todoEntity.getTitle());
         }
 
