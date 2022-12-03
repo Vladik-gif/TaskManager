@@ -22,7 +22,7 @@ public class TodoController {
     }
 
     @PostMapping(CREATE_TODO)
-    public TodoModel createTodo( @RequestParam Long id,
+    public TodoModel createTodo(@RequestParam Long id,
                                 @Valid  @RequestBody TodoEntity todo){
         return todoService.createTodo(id, todo);
     }
