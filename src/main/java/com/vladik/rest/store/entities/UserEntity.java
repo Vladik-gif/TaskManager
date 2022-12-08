@@ -15,15 +15,17 @@ public class UserEntity {
     private Long id;
     @NotBlank
     @Pattern(regexp = "^[A-Z][a-z]*(\\s(([a-z]{1,3})|(([a-z]+\\')?[A-Z][a-z]*)))*$")
+    @Column(unique = true)
     private String username;
     @NotBlank
+    @Column(unique = true)
     private String password;
     @NotBlank
     @Email
+    @Column(unique = true)
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<TodoEntity> todo;
-
 
     public UserEntity() {
     }

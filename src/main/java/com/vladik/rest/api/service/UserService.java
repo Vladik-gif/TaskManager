@@ -6,7 +6,6 @@ import com.vladik.rest.store.model.DeleteModel;
 import com.vladik.rest.store.model.UserModel;
 import com.vladik.rest.store.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -31,7 +30,7 @@ public class UserService {
         UserEntity user = userRepository.getReferenceById(id);
         serviceExceptionHelpers.serverHandlerIdException(id);
 
-        return UserModel.userModel(user);
+        return UserModel.userEntityModel(user);
     }
 
     public List<UserEntity> getUser() {
@@ -47,7 +46,7 @@ public class UserService {
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(user.getPassword());
 
-        return UserModel.userModel(userEntity);
+        return UserModel.userEntityModel(userEntity);
     }
 
     public DeleteModel deleteId(Long id){

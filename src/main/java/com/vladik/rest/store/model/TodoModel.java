@@ -7,7 +7,7 @@ public class TodoModel {
     private Long id;
     private String title;
 
-    public static TodoModel todoModel(TodoEntity todo){
+    public static TodoModel todoEntityModel(TodoEntity todo){
         TodoModel todoModel = new TodoModel();
 
         todoModel.setId(todo.getId());
@@ -16,8 +16,7 @@ public class TodoModel {
         return todoModel;
     }
 
-    public TodoModel() {
-    }
+    public TodoModel(){}
 
     public Long getId() {
         return id;
