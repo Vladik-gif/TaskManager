@@ -14,26 +14,32 @@ public class ServiceExceptionHelpers {
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
 
-    public ServiceExceptionHelpers(UserRepository userRepository, TodoRepository todoRepository) {
+    public ServiceExceptionHelpers(UserRepository userRepository,
+                                   TodoRepository todoRepository) {
         this.userRepository = userRepository;
         this.todoRepository = todoRepository;
     }
 
     public void serverHandlerIdException(Long id){
         userRepository.findById(id).orElseThrow(
-                () -> new BadRequestException("По такому id: " + id + " не найдено пользователя"));
+                () -> new BadRequestException(
+                        String.format("По такому id: \"%s\" не найдено пользователя", id))
+        );
     }
 
     public void serverHandlerNotFoundException(UserEntity user){
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new NotFoundException
-                    ("Пользователь з таким именем: " + user.getUsername() + " уже есть, повтори еще раз");
+            throw new NotFoundException(
+                    String.format("Пользователь з таким именем: \"%s\" уже есть, повтори еще раз", user.getUsername())
+            );
         }
     }
 
     public void serverHandlerNotFrondExceptionTitle(TodoEntity todo){
         if (todoRepository.findByTitle(todo.getTitle()).isPresent()){
-            throw new NotFoundException("Запись уже записанна :" + todo.getTitle());
+            throw new NotFoundException(
+                    String.format("Запись уже записанна: \"%s\"", todo.getTitle())
+            );
         }
     }
 }

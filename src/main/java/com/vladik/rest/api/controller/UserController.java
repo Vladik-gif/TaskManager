@@ -5,7 +5,6 @@ import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.model.DeleteModel;
 import com.vladik.rest.store.model.UserModel;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class UserController {
     private static final String CREATE_USER = "/createUser";
     private static final String GET_ONE_USER = "/getUserOne";
     private static final String GET_ALL_USER = "/getUser";
-    private static final String UPDATE_USER = "/updateUser/{id}";
+    private static final String UPDATE_USER = "/updateUser";
     private static final String DELETE_USER = "/deleteUser";
 
     public UserController(UserService userService) {
@@ -39,10 +38,10 @@ public class UserController {
         return userService.getUser();
     }
 
-    @PutMapping(UPDATE_USER)
-    public UserModel update(@PathVariable("id") Long id,
+    @PostMapping(UPDATE_USER)
+    public UserModel update(@RequestParam(required = false) Long id,
                             @Valid @RequestBody UserEntity username){
-        return userService.update(id, username);
+        return userService.update(id,username);
     }
 
     @DeleteMapping(DELETE_USER)

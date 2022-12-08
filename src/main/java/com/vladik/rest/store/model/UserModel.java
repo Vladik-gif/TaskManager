@@ -1,10 +1,12 @@
 package com.vladik.rest.store.model;
 
 import com.vladik.rest.store.entities.UserEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserModel {
 
     private Long id;
@@ -13,22 +15,20 @@ public class UserModel {
     private String email;
     private List<TodoModel> todo;
 
-
-    public static UserModel userModel(UserEntity user){
+    public static UserModel userEntityModel(UserEntity user){
         UserModel userModel = new UserModel();
 
         userModel.setId(user.getId());
         userModel.setUsername(user.getUsername());
         userModel.setPassword(user.getPassword());
         userModel.setEmail(user.getEmail());
-        userModel.setTodo(user.getTodo().stream().map(TodoModel::todoModel).collect(Collectors.toList()));
+        userModel.setTodo(user.getTodo().stream().map(TodoModel::todoEntityModel).collect(Collectors.toList()));
 
         return userModel;
     }
 
     public UserModel() {
     }
-
 
     public Long getId() {
         return id;

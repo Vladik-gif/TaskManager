@@ -1,6 +1,5 @@
 package com.vladik.rest.api.service;
 
-import com.vladik.rest.api.exception.exception.NotFoundException;
 import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.TodoEntity;
 import com.vladik.rest.store.entities.UserEntity;
@@ -32,7 +31,7 @@ public class TodoService {
 
         todoEntity.setUser(user);
 
-        return TodoModel.todoModel(todoRepository.save(todoEntity));
+        return TodoModel.todoEntityModel(todoRepository.save(todoEntity));
     }
 
     public TodoModel updateTodo(Long id, TodoEntity todo){
@@ -40,6 +39,6 @@ public class TodoService {
 
         todoEntity.setTitle(todo.getTitle());
 
-        return TodoModel.todoModel(todoRepository.save(todo));
+        return TodoModel.todoEntityModel(todoRepository.save(todo));
     }
 }
