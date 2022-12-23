@@ -2,8 +2,8 @@ package com.vladik.rest.api.controller;
 
 import com.vladik.rest.api.service.UserService;
 import com.vladik.rest.store.entities.UserEntity;
-import com.vladik.rest.store.model.DeleteModel;
-import com.vladik.rest.store.model.UserModel;
+import com.vladik.rest.api.dto.DeleteDto;
+import com.vladik.rest.api.dto.UserDto;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -24,28 +24,28 @@ public class UserController {
     }
 
     @PostMapping(CREATE_USER)
-    public UserEntity create(@Valid @RequestBody UserEntity userEntity) {
+    public UserDto create(@Valid @RequestBody UserEntity userEntity) {
         return userService.createUser(userEntity);
     }
 
     @GetMapping(GET_ONE_USER)
-    public UserModel getOne(@RequestParam Long id){
+    public UserDto getOne(@RequestParam Long id){
         return userService.getOne(id);
     }
 
     @GetMapping(GET_ALL_USER)
-    public List<UserEntity> getUser(){
+    public List<UserDto> getUser(){
         return userService.getUser();
     }
 
     @PostMapping(UPDATE_USER)
-    public UserModel update(@RequestParam(required = false) Long id,
-                            @Valid @RequestBody UserEntity username){
+    public UserDto update(@RequestParam(required = false) Long id,
+                          @Valid @RequestBody UserEntity username){
         return userService.update(id,username);
     }
 
     @DeleteMapping(DELETE_USER)
-    public DeleteModel deleteUserId(@RequestParam Long id){
+    public DeleteDto deleteUserId(@RequestParam Long id){
         return userService.deleteId(id);
     }
 }

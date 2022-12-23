@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,8 +25,10 @@ public class UserEntity {
     @Email
     @Column(unique = true)
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<TodoEntity> todo;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<TodoEntity> todo = new ArrayList<>();
 
     public UserEntity() {
     }

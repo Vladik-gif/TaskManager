@@ -13,12 +13,11 @@ public class TodoEntity {
     @NotBlank
     @Column(unique = true)
     private String title;
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public TodoEntity() {
+
     }
 
     public UserEntity getUser() {
