@@ -1,44 +1,50 @@
 package com.vladik.rest.api.service;
 
+import com.vladik.rest.api.factory.TodoDtoFactory;
 import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.TodoEntity;
+import com.vladik.rest.api.dto.TodoDto;
 import com.vladik.rest.store.entities.UserEntity;
-import com.vladik.rest.store.model.TodoModel;
 import com.vladik.rest.store.repository.TodoRepository;
 import com.vladik.rest.store.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
+import javax.transaction.Transactional;
 
 @Service
+@Transactional
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final TodoDtoFactory todoDtoFactory;
     private final UserRepository userRepository;
     private final ServiceExceptionHelpers serviceExceptionHelpers;
 
     public TodoService(TodoRepository todoRepository,
+                       TodoDtoFactory todoDtoFactory,
                        UserRepository userRepository,
                        ServiceExceptionHelpers serviceExceptionHelpers) {
         this.todoRepository = todoRepository;
+        this.todoDtoFactory = todoDtoFactory;
         this.userRepository = userRepository;
         this.serviceExceptionHelpers = serviceExceptionHelpers;
     }
 
-    public TodoModel createTodo(Long id, TodoEntity todoEntity){
-        UserEntity user = userRepository.getReferenceById(id);
+    public TodoDto createTodo(Long id,TodoEntity todoEntity){
+        UserEntity userId = userRepository.getReferenceById(id);
+        todoEntity.setUser(userId);
 
         serviceExceptionHelpers.serverHandlerNotFrondExceptionTitle(todoEntity);
 
-        todoEntity.setUser(user);
-
-        return TodoModel.todoEntityModel(todoRepository.save(todoEntity));
+        return todoDtoFactory.makeTodoDto(todoRepository.save(todoEntity));
     }
 
-    public TodoModel updateTodo(Long id, TodoEntity todo){
+    public TodoDto updateTodo(Long id, TodoEntity todo){
         TodoEntity todoEntity = todoRepository.getReferenceById(id);
+
+        serviceExceptionHelpers.serverHandlerIdException(id);
 
         todoEntity.setTitle(todo.getTitle());
 
-        return TodoModel.todoEntityModel(todoRepository.save(todo));
+        return todoDtoFactory.makeTodoDto(todoRepository.save(todo));
     }
 }
