@@ -9,15 +9,16 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
 
-    private static final String CREATE_USER = "/createUser";
-    private static final String GET_ONE_USER = "/getUserOne";
+    private static final String CREATE_USER = "/create";
+    private static final String GET_ONE_USER = "/getOne";
     private static final String GET_ALL_USER = "/getUser";
-    private static final String UPDATE_USER = "/updateUser";
-    private static final String DELETE_USER = "/deleteUser";
+    private static final String UPDATE_USER = "/update";
+    private static final String DELETE_USER = "/delete";
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -38,7 +39,7 @@ public class UserController {
         return userService.getUser();
     }
 
-    @PostMapping(UPDATE_USER)
+    @PutMapping(UPDATE_USER)
     public UserDto update(@RequestParam(required = false) Long id,
                           @Valid @RequestBody UserEntity username){
         return userService.update(id,username);
