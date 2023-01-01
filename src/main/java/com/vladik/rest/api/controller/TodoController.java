@@ -14,8 +14,8 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    private static final String CREATE_TODO = "/createTodo/{user_id}";
-    private static final String UPDATE_TODO = "/updateTodo";
+    private static final String CREATE_TODO = "/create/{user_id}";
+    private static final String UPDATE_TODO = "/update";
 
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
