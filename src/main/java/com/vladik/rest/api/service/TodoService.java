@@ -7,12 +7,12 @@ import com.vladik.rest.api.dto.TodoDto;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.TodoRepository;
 import com.vladik.rest.store.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-@Slf4j
+@Log4j
 @Transactional
 public class TodoService {
 
