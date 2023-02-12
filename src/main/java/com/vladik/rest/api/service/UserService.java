@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 @Log4j
 @Transactional
-public class UserService {
+public class UserService{
 
     private final UserRepository userRepository;
     private final ServiceExceptionHelpers serviceExceptionHelpers;
