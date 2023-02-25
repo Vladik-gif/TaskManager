@@ -1,10 +1,11 @@
 package com.vladik.rest.api.controller;
 
-import com.vladik.rest.api.service.UserService;
-import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.api.dto.DeleteDto;
 import com.vladik.rest.api.dto.UserDto;
+import com.vladik.rest.api.service.UserService;
+import com.vladik.rest.store.entities.UserEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public class UserController {
 
     private final UserService userService;
 
-    private static final String CREATE_USER = "/create";
-    private static final String GET_ONE_USER = "/getOne";
+    private static final String CREATE_USER = "/create/{id}";
+    private static final String GET_ONE_USER = "/getOne/{}";
     private static final String GET_ALL_USER = "/getUser";
     private static final String UPDATE_USER = "/update";
-    private static final String DELETE_USER = "/delete";
+    private static final String DELETE_USER = "/delete/{id}";
 
     public UserController(UserService userService) {
         this.userService = userService;
