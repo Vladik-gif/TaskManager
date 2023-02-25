@@ -7,13 +7,10 @@ import com.vladik.rest.api.dto.TodoDto;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.TodoRepository;
 import com.vladik.rest.store.repository.UserRepository;
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-@Log4j
-@Transactional
 public class TodoService {
 
     private final TodoRepository todoRepository;
@@ -37,8 +34,6 @@ public class TodoService {
 
         serviceExceptionHelpers.serverHandlerNotFrondExceptionTitle(todoEntity);
 
-        log.debug("Create todo id user: " + userId + "todo: " + todoEntity);
-
         return todoDtoFactory.makeTodoDto(todoRepository.save(todoEntity));
     }
 
@@ -48,8 +43,6 @@ public class TodoService {
         serviceExceptionHelpers.serverHandlerIdException(id);
 
         todoEntity.setTitle(todo.getTitle());
-
-        log.debug("Update todo to id: " + todoEntity);
 
         return todoDtoFactory.makeTodoDto(todoRepository.save(todo));
     }
