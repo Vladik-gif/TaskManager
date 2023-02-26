@@ -15,8 +15,8 @@ public class UserController {
 
     private final UserService userService;
 
-    private static final String CREATE_USER = "/create/{id}";
-    private static final String GET_ONE_USER = "/getOne/{}";
+    private static final String CREATE_USER = "/create";
+    private static final String GET_ONE_USER = "/getOne/{id}";
     private static final String GET_ALL_USER = "/getUser";
     private static final String UPDATE_USER = "/update";
     private static final String DELETE_USER = "/delete/{id}";
