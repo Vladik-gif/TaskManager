@@ -4,59 +4,61 @@ import com.vladik.rest.store.entities.RoleEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.core.userdetails.User.builder;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .mvcMatchers("/").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/user/**").hasAnyRole(
-                        RoleEntity.ADMIN.name(),
-                        RoleEntity.USER.name())
-                .mvcMatchers(HttpMethod.POST, "/user/**").hasRole(RoleEntity.ADMIN.name())
-                .mvcMatchers(HttpMethod.PUT, "/user/**").hasRole(RoleEntity.ADMIN.name())
-                .mvcMatchers(HttpMethod.DELETE, "/user/**").hasRole(RoleEntity.ADMIN.name())
-                .mvcMatchers(HttpMethod.POST, "/todo/**").hasRole(RoleEntity.ADMIN.name())
-                .mvcMatchers(HttpMethod.PUT, "/todo/**").hasRole(RoleEntity.ADMIN.name())
-                .anyRequest()
-                .authenticated()
+public class SecurityConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf()
+                .disable()
+                .cors()
                 .and()
-                .httpBasic();
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole(
+                                RoleEntity.ADMIN.name(), RoleEntity.USER.name())
+                        .requestMatchers(HttpMethod.POST, "/user/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT, "/user/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE, "/user/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/todo/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT, "/todo/**").hasRole(RoleEntity.ADMIN.name())
+                        .anyRequest()
+                        .authenticated()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncoder().encode("admin"))
-                        .roles("ADMIN")
-                        .build(),
+    public InMemoryUserDetailsManager userDetailsService() {
 
-                User.builder()
-                        .username("user")
-                        .password(passwordEncoder().encode("user"))
-                        .roles("USER")
-                        .build()
-        );
+        UserDetails user = builder()
+                .username("user")
+                .password(passwordEncoder().encode("user"))
+                .roles(String.valueOf(RoleEntity.USER))
+                .build();
+
+        UserDetails admin = builder()
+                .username("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles(String.valueOf(RoleEntity.ADMIN))
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
-    protected PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder(12);
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
