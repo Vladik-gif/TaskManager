@@ -2,11 +2,10 @@ package com.vladik.rest.api.controller;
 
 import com.vladik.rest.api.service.TodoService;
 import com.vladik.rest.store.entities.TodoEntity;
-
 import com.vladik.rest.api.dto.TodoDto;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/todo")

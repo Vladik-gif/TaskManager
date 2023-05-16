@@ -8,7 +8,6 @@ import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.TodoRepository;
 import com.vladik.rest.store.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 
 @Service
 public class TodoService {
