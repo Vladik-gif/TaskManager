@@ -4,9 +4,8 @@ import com.vladik.rest.api.dto.DeleteDto;
 import com.vladik.rest.api.dto.UserDto;
 import com.vladik.rest.api.service.UserService;
 import com.vladik.rest.store.entities.UserEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
