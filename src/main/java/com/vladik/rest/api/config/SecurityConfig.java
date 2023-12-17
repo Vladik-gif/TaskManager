@@ -4,29 +4,29 @@ import com.vladik.rest.store.entities.RoleEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.core.userdetails.User.builder;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf()
-                .disable()
-                .cors()
-                .and()
-                .authorizeHttpRequests((auth) -> auth
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole(
-                                RoleEntity.ADMIN.name(), RoleEntity.USER.name())
+                                RoleEntity.ADMIN.name(),
+                                RoleEntity.USER.name())
                         .requestMatchers(HttpMethod.POST, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE, "/user/**").hasRole(RoleEntity.ADMIN.name())
@@ -35,30 +35,29 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
-                .build();
+                .httpBasic(withDefaults());
+        return http.build();
     }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-
-        UserDetails user = builder()
+        UserDetails user = User.builder()
                 .username("user")
                 .password(passwordEncoder().encode("user"))
-                .roles(String.valueOf(RoleEntity.USER))
+                .roles(RoleEntity.USER.name())
                 .build();
 
-        UserDetails admin = builder()
+        UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("admin"))
-                .roles(String.valueOf(RoleEntity.ADMIN))
+                .roles(RoleEntity.ADMIN.name())
                 .build();
 
         return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    protected PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(12);
     }
 }

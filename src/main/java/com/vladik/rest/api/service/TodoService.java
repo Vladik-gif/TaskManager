@@ -1,6 +1,7 @@
 package com.vladik.rest.api.service;
 
 import com.vladik.rest.api.factory.TodoDtoFactory;
+import com.vladik.rest.api.service.impl.TodoServiceImpl;
 import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.TodoEntity;
 import com.vladik.rest.api.dto.TodoDto;
@@ -10,7 +11,7 @@ import com.vladik.rest.store.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TodoService {
+public class TodoService implements TodoServiceImpl {
 
     private final TodoRepository todoRepository;
     private final TodoDtoFactory todoDtoFactory;
