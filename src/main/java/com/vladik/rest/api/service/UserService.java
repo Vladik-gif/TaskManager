@@ -4,6 +4,7 @@ import com.vladik.rest.api.dto.DeleteDto;
 import com.vladik.rest.api.dto.UserDto;
 import com.vladik.rest.api.factory.DeleteDtoFactory;
 import com.vladik.rest.api.factory.UserDtoFactory;
+import com.vladik.rest.api.service.impl.UserServiceImpl;
 import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.UserRepository;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService{
+public class UserService implements UserServiceImpl {
 
     private final UserRepository userRepository;
     private final ServiceExceptionHelpers serviceExceptionHelpers;
