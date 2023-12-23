@@ -14,7 +14,7 @@ public class TodoController {
     private final TodoService todoService;
 
     private static final String CREATE_TODO = "/create/{user_id}";
-    private static final String UPDATE_TODO = "/update";
+    private static final String UPDATE_TODO = "/update/{id}";
 
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
@@ -27,7 +27,7 @@ public class TodoController {
     }
 
     @PatchMapping(UPDATE_TODO)
-    public TodoDto update(@RequestParam Long id,
+    public TodoDto update(@PathVariable Long id,
                           @Valid @RequestBody TodoEntity todo){
         return todoService.updateTodo(id, todo);
     }
