@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping(GET_ONE_USER)
-    public UserDto getOne(@RequestParam Long id){
+    public UserDto getOne(@PathVariable Long id){
         return userService.getOne(id);
     }
 
@@ -40,13 +40,13 @@ public class UserController {
     }
 
     @PutMapping(UPDATE_USER)
-    public UserDto update(@RequestParam(required = false) Long id,
+    public UserDto update(@PathVariable Long id,
                           @Valid @RequestBody UserEntity username){
         return userService.update(id,username);
     }
 
     @DeleteMapping(DELETE_USER)
-    public DeleteDto deleteUserId(@RequestParam Long id){
+    public DeleteDto deleteUserId(@PathVariable Long id){
         return userService.deleteId(id);
     }
 }
