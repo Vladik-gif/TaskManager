@@ -6,13 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TodoDtoFactory {
-
     public TodoDto makeTodoDto(TodoEntity todo){
-        TodoDto todoModel = new TodoDto();
-
-        todoModel.setId(todo.getId());
-        todoModel.setTitle(todo.getTitle());
-
-        return todoModel;
+        return TodoDto.builder()
+                .id(todo.getId())
+                .title(todo.getTitle())
+                .build();
     }
 }

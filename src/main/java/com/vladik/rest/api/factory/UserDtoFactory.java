@@ -2,30 +2,25 @@ package com.vladik.rest.api.factory;
 
 import com.vladik.rest.api.dto.UserDto;
 import com.vladik.rest.store.entities.UserEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class UserDtoFactory {
-
     private final TodoDtoFactory todoDtoFactory;
-
-    public UserDtoFactory(TodoDtoFactory todoDtoFactory) {
-        this.todoDtoFactory = todoDtoFactory;
-    }
-
     public UserDto makeUserDto(UserEntity user){
-        UserDto userModel = new UserDto();
-
-        userModel.setId(user.getId());
-        userModel.setUsername(user.getUsername());
-        userModel.setPassword(user.getPassword());
-        userModel.setEmail(user.getEmail());
-        userModel.setTodo(user.getTodo().stream()
-                .map(todoDtoFactory::makeTodoDto)
-                .collect(Collectors.toList())
-        );
-        return userModel;
+        return UserDto.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .todo(user.getTodo().stream()
+                        .map(todoDtoFactory::makeTodoDto)
+                        .collect(Collectors.toList())
+                )
+                .build();
     }
 }

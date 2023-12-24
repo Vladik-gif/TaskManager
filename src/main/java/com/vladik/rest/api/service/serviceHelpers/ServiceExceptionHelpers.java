@@ -6,19 +6,15 @@ import com.vladik.rest.store.entities.TodoEntity;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.TodoRepository;
 import com.vladik.rest.store.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ServiceExceptionHelpers {
 
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
-
-    public ServiceExceptionHelpers(UserRepository userRepository,
-                                   TodoRepository todoRepository) {
-        this.userRepository = userRepository;
-        this.todoRepository = todoRepository;
-    }
 
     public void serverHandlerIdException(Long id){
         userRepository.findById(id).orElseThrow(

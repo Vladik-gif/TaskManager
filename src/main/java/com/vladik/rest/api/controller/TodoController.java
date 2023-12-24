@@ -4,21 +4,17 @@ import com.vladik.rest.api.service.TodoService;
 import com.vladik.rest.store.entities.TodoEntity;
 import com.vladik.rest.api.dto.TodoDto;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/todo")
+@RequiredArgsConstructor
 public class TodoController {
 
     private final TodoService todoService;
-
     private static final String CREATE_TODO = "/create/{user_id}";
     private static final String UPDATE_TODO = "/update/{id}";
-
-    public TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
 
     @PostMapping(CREATE_TODO)
     public TodoDto createTodo(@PathVariable(name = "user_id") Long id,

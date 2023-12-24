@@ -1,28 +1,15 @@
 package com.vladik.rest.api.dto;
 
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class TodoDto {
-
     private Long id;
     private String title;
-
-    public TodoDto(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }
