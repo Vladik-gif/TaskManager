@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component;
 public class DeleteDtoFactory {
 
     public DeleteDto makeDeleteDto(boolean deleteId){
-        DeleteDto delete = new DeleteDto();
-        delete.setDeleteId(deleteId);
-        return delete;
+        return DeleteDto.builder()
+                .deleteId(deleteId)
+                .build();
     }
-
 }

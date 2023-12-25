@@ -1,4 +1,4 @@
-package com.vladik.rest.api.exception.handlerException;
+package com.vladik.rest.api.utils.validation;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

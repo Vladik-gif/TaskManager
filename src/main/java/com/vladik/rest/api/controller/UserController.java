@@ -5,11 +5,13 @@ import com.vladik.rest.api.dto.UserDto;
 import com.vladik.rest.api.service.UserService;
 import com.vladik.rest.store.entities.UserEntity;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
@@ -19,10 +21,6 @@ public class UserController {
     private static final String GET_ALL_USER = "/getUser";
     private static final String UPDATE_USER = "/update";
     private static final String DELETE_USER = "/delete/{id}";
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping(CREATE_USER)
     public UserDto create(@Valid @RequestBody UserEntity userEntity) {
