@@ -35,5 +35,5 @@ public class UserEntity {
     private String email;
     @OneToMany
     @JoinColumn(name = "user_id")
-    private List<TodoEntity> todo = new ArrayList<>();
+    private List<TodoEntity> todo;
 }

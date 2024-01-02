@@ -1,6 +1,19 @@
 spring:
   config:
     import: optional:file:.env[.properties]
+  security:
+    oauth2:
+      client:
+        registration:
+          # GitHub Login
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_LODIN_SECRET}
+          # Google Login
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
     username: ${POSTGRES_USERNAME}
@@ -10,3 +23,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
