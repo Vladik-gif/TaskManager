@@ -13,7 +13,7 @@ import lombok.*;
 @Builder
 public class TodoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     @Column(unique = true)
