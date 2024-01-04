@@ -63,4 +63,20 @@ public class UserServiceImpl implements UserService {
 
         return deleteDtoFactory.makeDeleteDto(true);
     }
+
+    @Override
+    public List<UserDto> filterUsername(String filter) {
+        List<UserDto> users = userRepository.findAll().stream()
+                .map(userDtoFactory::makeUserDto)
+                .toList();
+
+        return users.stream()
+                .filter(userDto -> userDto.username().contains(filter))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
 }

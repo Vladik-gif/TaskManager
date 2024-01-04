@@ -18,9 +18,11 @@ public class UserController {
 
     private static final String CREATE_USER = "/create";
     private static final String GET_ONE_USER = "/{id}";
-    private static final String GET_ALL_USER = "/getUser";
-    private static final String UPDATE_USER = "/update";
+    private static final String GET_ALL_USER = "/gets";
+    private static final String UPDATE_USER = "/update/{id}";
+    private static final String FILTER_USERNAME = "/filter/{username}";
     private static final String DELETE_USER = "/delete/{id}";
+    private static final String DELETE_USER_ALL = "/deleteAll";
 
     @PostMapping(CREATE_USER)
     public UserDto create(@Valid @RequestBody UserEntity userEntity) {
@@ -42,9 +44,18 @@ public class UserController {
                           @Valid @RequestBody UserEntity username){
         return userService.update(id,username);
     }
-
+    @GetMapping(FILTER_USERNAME)
+    public List<UserDto> filterUsername(@PathVariable(value = "username") String filter){
+        return userService.filterUsername(filter);
+    }
     @DeleteMapping(DELETE_USER)
     public DeleteDto deleteUserId(@PathVariable Long id){
         return userService.deleteId(id);
+    }
+
+    @DeleteMapping(DELETE_USER_ALL)
+    public String deleteAllUser(){
+        userService.deleteAll();
+        return "Users deleteAll";
     }
 }
