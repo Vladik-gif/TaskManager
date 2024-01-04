@@ -12,4 +12,6 @@ public interface UserService {
     List<UserDto> getUser();
     UserDto update(Long id, UserEntity user);
     DeleteDto deleteId(Long id);
+    List<UserDto> filterUsername(String filter);
+    void deleteAll();
 }
