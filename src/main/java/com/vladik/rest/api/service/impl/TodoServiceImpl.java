@@ -30,12 +30,17 @@ public class TodoServiceImpl implements TodoService {
     }
 
     public TodoDto updateTodo(Long id, TodoEntity todo){
-        TodoEntity todoEntity = todoRepository.getReferenceById(id);
+        TodoEntity todoId = todoRepository.getReferenceById(id);
 
         serviceExceptionHelpers.serverHandlerIdException(id);
 
-        todoEntity.setTitle(todo.getTitle());
+        TodoEntity saveTodo = TodoEntity.builder()
+                .id(todoId.getId())
+                .title(todoId.getTitle())
+                .description(todoId.getDescription())
+                .createDate(todoId.getCreateDate())
+                .build();
 
-        return todoDtoFactory.makeTodoDto(todoRepository.save(todo));
+        return todoDtoFactory.makeTodoDto(todoRepository.save(saveTodo));
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "todo")
 @NoArgsConstructor
@@ -18,6 +20,9 @@ public class TodoEntity {
     @NotBlank
     @Column(unique = true)
     private String title;
+    @NotBlank
+    private String description;
+    private LocalDateTime createDate = LocalDateTime.now();
     @ManyToOne
     private UserEntity user;
 }

@@ -10,6 +10,8 @@ public class TodoDtoFactory {
         return TodoDto.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
+                .description(todo.getDescription())
+                .createDate(todo.getCreateDate())
                 .build();
     }
 }
