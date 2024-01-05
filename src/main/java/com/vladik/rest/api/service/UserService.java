@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
     UserDto createUser(UserEntity userEntity);
     UserDto getOne(Long id);
-    List<UserDto> getUser();
+    List<UserDto> getUsers();
     UserDto update(Long id, UserEntity user);
     DeleteDto deleteId(Long id);
     List<UserDto> filterUsername(String filter);
