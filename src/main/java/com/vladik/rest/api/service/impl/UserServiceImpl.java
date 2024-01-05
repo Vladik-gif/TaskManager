@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         return userDtoFactory.makeUserDto(user);
     }
 
-    public List<UserDto> getUser() {
+    public List<UserDto> getUsers() {
         return userRepository.findAll().stream()
                 .map(userDtoFactory::makeUserDto)
                 .collect(Collectors.toList());

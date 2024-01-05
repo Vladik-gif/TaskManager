@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping(GET_ALL_USER)
     public List<UserDto> getUser(){
-        return userService.getUser();
+        return userService.getUsers();
     }
 
     @PutMapping(UPDATE_USER)

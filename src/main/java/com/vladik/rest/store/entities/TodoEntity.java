@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "todo")
@@ -25,4 +26,6 @@ public class TodoEntity {
     private LocalDateTime createDate = LocalDateTime.now();
     @ManyToOne
     private UserEntity user;
+    @ManyToOne
+    private CategoryEntity category;
 }

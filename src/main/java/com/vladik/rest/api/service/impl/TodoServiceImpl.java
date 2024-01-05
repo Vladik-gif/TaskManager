@@ -11,6 +11,9 @@ import com.vladik.rest.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class TodoServiceImpl implements TodoService {
@@ -42,5 +45,12 @@ public class TodoServiceImpl implements TodoService {
                 .build();
 
         return todoDtoFactory.makeTodoDto(todoRepository.save(saveTodo));
+    }
+
+    @Override
+    public List<TodoDto> getAll() {
+        return todoRepository.findAll().stream()
+                .map(todoDtoFactory::makeTodoDto)
+                .collect(Collectors.toList());
     }
 }
