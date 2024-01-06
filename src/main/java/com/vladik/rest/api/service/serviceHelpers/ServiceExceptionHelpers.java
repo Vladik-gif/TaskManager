@@ -19,14 +19,14 @@ public class ServiceExceptionHelpers {
     public void serverHandlerIdException(Long id){
         userRepository.findById(id).orElseThrow(
                 () -> new BadRequestException(
-                        String.format("По такому id: %s не найдено пользователя", id))
+                        String.format("По цьому id: %s не знаходить користувача", id))
         );
     }
 
     public void serverHandlerNotFoundException(UserEntity user){
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new NotFoundException(
-                    String.format("Пользователь з таким именем: %s уже есть, повтори еще раз", user.getUsername())
+                    String.format("Корисувач з цим ім'ям %s вже є, спробуйте ще раз", user.getUsername())
             );
         }
     }
@@ -34,7 +34,7 @@ public class ServiceExceptionHelpers {
     public void serverHandlerNotFrondExceptionTitle(TodoEntity todo){
         if (todoRepository.findByTitle(todo.getTitle()).isPresent()){
             throw new NotFoundException(
-                    String.format("Запись уже записанна: %s ", todo.getTitle())
+                    String.format("Задача вже є: %s ", todo.getTitle())
             );
         }
     }
