@@ -26,6 +26,7 @@ public class TodoEntity {
     private LocalDateTime createDate = LocalDateTime.now();
     @ManyToOne
     private UserEntity user;
+    private boolean doneTask;
     @ManyToOne
     private CategoryEntity category;
 }

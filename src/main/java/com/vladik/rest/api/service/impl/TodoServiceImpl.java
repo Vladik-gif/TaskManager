@@ -42,6 +42,7 @@ public class TodoServiceImpl implements TodoService {
                 .title(todoId.getTitle())
                 .description(todoId.getDescription())
                 .createDate(todoId.getCreateDate())
+                .doneTask(todo.isDoneTask())
                 .build();
 
         return todoDtoFactory.makeTodoDto(todoRepository.save(saveTodo));

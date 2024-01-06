@@ -15,6 +15,7 @@ public class TodoDtoFactory {
                 .title(todo.getTitle())
                 .description(todo.getDescription())
                 .createDate(todo.getCreateDate())
+                .doneTask(todo.isDoneTask())
                 .category(todo.getCategory())
                 .build();
     }
