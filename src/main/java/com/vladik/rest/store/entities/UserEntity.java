@@ -33,5 +33,5 @@ public class UserEntity {
     private String email;
     @OneToMany
     @JoinColumn(name = "user_id")
-    private List<TodoEntity> todo;
+    private List<TaskEntity> todo;
 }

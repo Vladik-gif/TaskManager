@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Builder
-public record TodoDto(Long id,
+public record TaskDto(Long id,
                       String title,
                       String description,
                       LocalDateTime createDate,

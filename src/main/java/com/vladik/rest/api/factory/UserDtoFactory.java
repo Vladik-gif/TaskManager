@@ -1,6 +1,6 @@
 package com.vladik.rest.api.factory;
 
-import com.vladik.rest.api.dto.TodoDto;
+import com.vladik.rest.api.dto.TaskDto;
 import com.vladik.rest.api.dto.UserDto;
 import com.vladik.rest.store.entities.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class UserDtoFactory {
-    private final TodoDtoFactory todoDtoFactory;
+    private final TaskDtoFactory taskDtoFactory;
     public UserDto makeUserDto(UserEntity user){
         return UserDto.builder()
                 .id(user.getId())
@@ -25,10 +25,10 @@ public class UserDtoFactory {
                 .build();
     }
 
-    private List<TodoDto> isNull(UserEntity user){
+    private List<TaskDto> isNull(UserEntity user){
         return Optional.ofNullable(user.getTodo())
                 .map(todoList -> todoList.stream()
-                        .map(todoDtoFactory::makeTodoDto)
+                        .map(taskDtoFactory::makeTaskDto)
                         .collect(Collectors.toList()))
                         .orElse(Collections.emptyList());
     }

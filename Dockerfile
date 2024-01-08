@@ -1,14 +1,12 @@
-#Build Gradle
-FROM gradle:8.1-amazoncorretto-20 AS builder
+FROM gradle:8.0.2-jdk17 AS builder
 WORKDIR /app
-COPY build.gradle .
-COPY settings.gradle .
-COPY src ./src
-RUN gradle build --no-daemon
+COPY ./src src/
+COPY ./build.gradle build.gradle
+COPY ./settings.gradle settings.gradle
+RUN gradle clean build -x test
 
-#Build Java
-FROM amazoncorretto:20-al2-full as final
+FROM openjdk:17-alpine
 WORKDIR /app
+COPY --from=builder /app/build/libs/restapi-0.0.1-SNAPSHOT.jar api.jar
 EXPOSE 8080
-COPY ./build/libs/backend-0.0.1-SNAPSHOT.jar /backend.jar
-ENTRYPOINT ["java","-jar", "/backend.jar"]
+CMD ["java","-jar","api.jar"]

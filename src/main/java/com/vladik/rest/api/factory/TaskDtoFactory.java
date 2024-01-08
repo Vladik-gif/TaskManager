@@ -1,16 +1,14 @@
 package com.vladik.rest.api.factory;
 
-import com.vladik.rest.api.dto.TodoDto;
-import com.vladik.rest.store.entities.CategoryEntity;
-import com.vladik.rest.store.entities.TodoEntity;
-import lombok.RequiredArgsConstructor;
+import com.vladik.rest.api.dto.TaskDto;
+import com.vladik.rest.store.entities.TaskEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TodoDtoFactory {
+public class TaskDtoFactory {
 
-    public TodoDto makeTodoDto(TodoEntity todo){
-        return TodoDto.builder()
+    public TaskDto makeTaskDto(TaskEntity todo){
+        return TaskDto.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
                 .description(todo.getDescription())

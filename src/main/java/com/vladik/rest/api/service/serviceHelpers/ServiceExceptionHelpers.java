@@ -2,9 +2,9 @@ package com.vladik.rest.api.service.serviceHelpers;
 
 import com.vladik.rest.api.exception.exception.BadRequestException;
 import com.vladik.rest.api.exception.exception.NotFoundException;
-import com.vladik.rest.store.entities.TodoEntity;
+import com.vladik.rest.store.entities.TaskEntity;
 import com.vladik.rest.store.entities.UserEntity;
-import com.vladik.rest.store.repository.TodoRepository;
+import com.vladik.rest.store.repository.TaskRepository;
 import com.vladik.rest.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ServiceExceptionHelpers {
 
     private final UserRepository userRepository;
-    private final TodoRepository todoRepository;
+    private final TaskRepository taskRepository;
 
     public void serverHandlerIdException(Long id){
         userRepository.findById(id).orElseThrow(
@@ -31,8 +31,8 @@ public class ServiceExceptionHelpers {
         }
     }
 
-    public void serverHandlerNotFrondExceptionTitle(TodoEntity todo){
-        if (todoRepository.findByTitle(todo.getTitle()).isPresent()){
+    public void serverHandlerNotFrondExceptionTitle(TaskEntity todo){
+        if (taskRepository.findByTitle(todo.getTitle()).isPresent()){
             throw new NotFoundException(
                     String.format("Задача вже є: %s ", todo.getTitle())
             );
