@@ -13,7 +13,8 @@ public class TaskDtoFactory {
                 .title(todo.getTitle())
                 .description(todo.getDescription())
                 .createDate(todo.getCreateDate())
-                .doneTask(todo.isDoneTask())
+                .doneDateTask(todo.getDoneDateTask())
+                .statusTask(todo.isStatusTask())
                 .category(todo.getCategory())
                 .build();
     }
