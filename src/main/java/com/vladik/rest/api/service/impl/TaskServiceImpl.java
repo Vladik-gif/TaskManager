@@ -56,4 +56,15 @@ public class TaskServiceImpl implements TaskService {
                 .map(taskDtoFactory::makeTaskDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TaskDto> filterStatus(String filter) {
+        List<TaskDto> tasks = taskRepository.findAll()
+                .stream()
+                .map(taskDtoFactory::makeTaskDto).toList();
+
+        return tasks.stream()
+                .filter(taskDto -> taskDto.statusTask().name().contains(filter))
+                .collect(Collectors.toList());
+    }
 }
