@@ -23,7 +23,7 @@ public class TaskEntity {
     private String description;
     private LocalDateTime createDate = LocalDateTime.now();
     private LocalDate doneDateTask;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
     private boolean statusTask;
