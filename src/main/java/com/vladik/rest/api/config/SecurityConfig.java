@@ -1,6 +1,6 @@
 package com.vladik.rest.api.config;
 
-import com.vladik.rest.store.entities.RoleEntity;
+import com.vladik.rest.store.enums.RoleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

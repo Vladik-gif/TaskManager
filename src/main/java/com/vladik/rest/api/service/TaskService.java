@@ -9,4 +9,5 @@ public interface TaskService {
     TaskDto createTodo(Long id, TaskEntity taskEntity);
     TaskDto updateTodo(Long id, TaskEntity todo);
     List<TaskDto> getAll();
+    List<TaskDto> filterStatus(String filter);
 }

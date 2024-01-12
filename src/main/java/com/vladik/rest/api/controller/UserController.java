@@ -45,8 +45,8 @@ public class UserController {
         return userService.update(id,username);
     }
     @GetMapping(FILTER_USERNAME)
-    public List<UserDto> filterUsername(@PathVariable(value = "username") String filter){
-        return userService.filterUsername(filter);
+    public List<UserDto> filterUsername(@PathVariable String username){
+        return userService.filterUsername(username);
     }
     @DeleteMapping(DELETE_USER)
     public DeleteDto deleteUserId(@PathVariable Long id){
