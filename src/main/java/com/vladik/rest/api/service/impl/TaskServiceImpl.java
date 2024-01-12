@@ -42,7 +42,8 @@ public class TaskServiceImpl implements TaskService {
                 .title(todoId.getTitle())
                 .description(todoId.getDescription())
                 .createDate(todoId.getCreateDate())
-                .doneTask(todo.isDoneTask())
+                .doneDateTask(todoId.getDoneDateTask())
+                .statusTask(todoId.isStatusTask())
                 .build();
 
         return taskDtoFactory.makeTaskDto(taskRepository.save(saveTodo));

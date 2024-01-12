@@ -31,7 +31,6 @@ public class UserEntity {
     @Email(message = "Приклад: test@gmail")
     @Column(unique = true)
     private String email;
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TaskEntity> todo;
 }
