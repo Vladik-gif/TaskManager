@@ -1,6 +1,7 @@
 package com.vladik.rest.api.dto;
 
 import com.vladik.rest.store.entities.CategoryEntity;
+import com.vladik.rest.store.enums.StatusEntity;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,6 +13,6 @@ public record TaskDto(Long id,
                       String description,
                       LocalDateTime createDate,
                       LocalDate doneDateTask,
-                      boolean statusTask,
+                      StatusEntity statusTask,
                       CategoryEntity category
 ) {}

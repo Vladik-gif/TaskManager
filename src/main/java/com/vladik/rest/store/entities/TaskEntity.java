@@ -1,5 +1,6 @@
 package com.vladik.rest.store.entities;
 
+import com.vladik.rest.store.enums.StatusEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -26,7 +27,8 @@ public class TaskEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
-    private boolean statusTask;
+    @Enumerated(value = EnumType.STRING)
+    private StatusEntity statusTask;
     @ManyToOne
     private CategoryEntity category;
 }
