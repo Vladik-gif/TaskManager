@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         return userDtoFactory.makeUserDto(userRepository.save(userEntity));
     }
 
-    public UserDto getOne(Long id) {
+    public UserDto getByIdUser(Long id) {
         UserEntity user = userRepository.getReferenceById(id);
         serviceExceptionHelpers.serverHandlerIdException(id);
 
@@ -37,12 +37,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDto> getUsers() {
-        return userRepository.findAll().stream()
-                .map(userDtoFactory::makeUserDto)
-                .collect(Collectors.toList());
+        return findAllUser();
     }
 
-    public UserDto update(Long id, UserEntity user) {
+    public UserDto updateUserById(Long id, UserEntity user) {
         UserEntity userEntity = userRepository.getReferenceById(id);
 
         serviceExceptionHelpers.serverHandlerIdException(id);
@@ -65,18 +63,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> filterUsername(String filter) {
-        List<UserDto> users = userRepository.findAll().stream()
-                .map(userDtoFactory::makeUserDto)
-                .toList();
-
-        return users.stream()
-                .filter(userDto -> userDto.username().contains(filter))
+    public List<UserDto> filterUsername(String username) {
+        return findAllUser().stream()
+                .filter(userDto -> userDto.username().contains(username))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void deleteAll() {
         userRepository.deleteAll();
+    }
+
+
+    private List<UserDto> findAllUser(){
+        return userRepository.findAll().stream()
+                .map(userDtoFactory::makeUserDto)
+                .toList();
     }
 }
