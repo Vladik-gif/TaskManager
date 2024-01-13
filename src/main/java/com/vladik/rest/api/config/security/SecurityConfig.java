@@ -1,5 +1,6 @@
-package com.vladik.rest.api.config;
+package com.vladik.rest.api.config.security;
 
+import com.vladik.rest.api.config.security.PasswordEncoderProvider;
 import com.vladik.rest.store.enums.RoleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +37,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.POST, "/todo/**").hasRole(RoleEntity.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST, "/сategory").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/сategory/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.GET, "/сategory/**").hasRole(RoleEntity.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE, "/сategory/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT, "/todo/**").hasRole(RoleEntity.ADMIN.name())
                         .anyRequest()
                         .authenticated()

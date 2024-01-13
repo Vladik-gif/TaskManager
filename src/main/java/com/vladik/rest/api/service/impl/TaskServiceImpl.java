@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
         return taskDtoFactory.makeTaskDto(taskRepository.save(taskEntity));
     }
 
-    public TaskDto updateTodo(Long id, TaskEntity todo){
+    public TaskDto updateByIdTodo(Long id, TaskEntity todo){
         TaskEntity todoId = taskRepository.getReferenceById(id);
 
         serviceExceptionHelpers.serverHandlerIdException(id);
@@ -52,19 +52,26 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDto> getAll() {
-        return taskRepository.findAll().stream()
-                .map(taskDtoFactory::makeTaskDto)
+        return findAllTask();
+    }
+
+    @Override
+    public List<TaskDto> filterStatus(String status) {
+        return findAllTask().stream()
+                .filter(taskDto -> taskDto.statusTask().name().contains(status))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TaskDto> filterStatus(String filter) {
-        List<TaskDto> tasks = taskRepository.findAll()
+    public List<TaskDto> filterCategory(String category) {
+        return findAllTask().stream()
+                .filter(taskDto -> taskDto.category().getCategoryName().contains(category))
+                .collect(Collectors.toList());
+    }
+
+    private List<TaskDto> findAllTask(){
+        return taskRepository.findAll()
                 .stream()
                 .map(taskDtoFactory::makeTaskDto).toList();
-
-        return tasks.stream()
-                .filter(taskDto -> taskDto.statusTask().name().contains(filter))
-                .collect(Collectors.toList());
     }
 }

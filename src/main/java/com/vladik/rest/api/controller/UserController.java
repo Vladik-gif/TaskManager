@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping(GET_ONE_USER)
     public UserDto getOne(@PathVariable Long id){
-        return userService.getOne(id);
+        return userService.getByIdUser(id);
     }
 
     @GetMapping(GET_ALL_USER)
@@ -42,7 +42,7 @@ public class UserController {
     @PutMapping(UPDATE_USER)
     public UserDto update(@PathVariable Long id,
                           @Valid @RequestBody UserEntity username){
-        return userService.update(id,username);
+        return userService.updateUserById(id,username);
     }
     @GetMapping(FILTER_USERNAME)
     public List<UserDto> filterUsername(@PathVariable String username){
