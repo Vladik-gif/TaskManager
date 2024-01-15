@@ -33,6 +33,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/todo/**").hasAnyRole(
                                 RoleEntity.ADMIN.name(),
                                 RoleEntity.USER.name())
+                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole(
+                                RoleEntity.ADMIN.name(),
+                                RoleEntity.USER.name())
                         .requestMatchers(HttpMethod.POST, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT, "/user/**").hasRole(RoleEntity.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE, "/user/**").hasRole(RoleEntity.ADMIN.name())
