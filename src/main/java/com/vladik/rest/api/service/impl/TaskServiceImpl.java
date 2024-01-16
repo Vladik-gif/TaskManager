@@ -6,7 +6,6 @@ import com.vladik.rest.api.service.serviceHelpers.ServiceExceptionHelpers;
 import com.vladik.rest.store.entities.TaskEntity;
 import com.vladik.rest.api.dto.TaskDto;
 import com.vladik.rest.store.entities.UserEntity;
-import com.vladik.rest.store.enums.StatusEntity;
 import com.vladik.rest.store.repository.TaskRepository;
 import com.vladik.rest.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
