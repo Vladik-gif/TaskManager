@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

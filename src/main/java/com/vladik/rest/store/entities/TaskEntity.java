@@ -22,6 +22,7 @@ public class TaskEntity {
     private String title;
     @NotBlank
     private String description;
+    @Builder.Default
     private LocalDateTime createDate = LocalDateTime.now();
     private LocalDate doneDateTask;
     @ManyToOne(fetch = FetchType.LAZY)
