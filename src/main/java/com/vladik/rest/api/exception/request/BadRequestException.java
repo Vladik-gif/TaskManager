@@ -1,4 +1,4 @@
-package com.vladik.rest.api.exception;
+package com.vladik.rest.api.exception.request;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
