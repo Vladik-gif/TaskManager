@@ -1,7 +1,7 @@
 package com.vladik.rest.api.service.serviceHelpers;
 
-import com.vladik.rest.api.exception.exception.BadRequestException;
-import com.vladik.rest.api.exception.exception.NotFoundException;
+import com.vladik.rest.api.exception.BadRequestException;
+import com.vladik.rest.api.exception.NotFoundException;
 import com.vladik.rest.store.entities.TaskEntity;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.repository.TaskRepository;

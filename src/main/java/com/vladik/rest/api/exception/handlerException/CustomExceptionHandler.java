@@ -1,7 +1,7 @@
 package com.vladik.rest.api.exception.handlerException;
 
-import com.vladik.rest.api.exception.exception.BadRequestException;
-import com.vladik.rest.api.exception.exception.NotFoundException;
+import com.vladik.rest.api.exception.BadRequestException;
+import com.vladik.rest.api.exception.NotFoundException;
 import com.vladik.rest.api.exception.extitiException.AppError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
