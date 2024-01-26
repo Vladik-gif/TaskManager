@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import org.springframework.data.redis.core.RedisHash;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,7 +18,8 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class UserEntity {
+@ToString
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
