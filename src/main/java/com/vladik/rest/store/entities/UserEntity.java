@@ -6,8 +6,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import org.springframework.data.redis.core.RedisHash;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -17,10 +18,11 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class UserEntity {
+@ToString
+public class UserEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Поле не повинно містить пусте значення, повторіть ще раз ")
     @Pattern(regexp = "^[A-Z][a-z]*(\\s(([a-z]{1,3})|(([a-z]+\\')?[A-Z][a-z]*)))*$")
@@ -33,7 +35,6 @@ public class UserEntity {
     @Email(message = "Приклад: test@gmail")
     @Column(unique = true)
     private String email;
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<TodoEntity> todo;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TaskEntity> todo;
 }

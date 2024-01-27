@@ -18,9 +18,11 @@ public class UserController {
 
     private static final String CREATE_USER = "/create";
     private static final String GET_ONE_USER = "/{id}";
-    private static final String GET_ALL_USER = "/getUser";
-    private static final String UPDATE_USER = "/update";
+    private static final String GET_ALL_USER = "/gets";
+    private static final String UPDATE_USER = "/update/{id}";
+    private static final String FILTER_USERNAME = "/filter/{username}";
     private static final String DELETE_USER = "/delete/{id}";
+    private static final String DELETE_USER_ALL = "/deleteAll";
 
     @PostMapping(CREATE_USER)
     public UserDto create(@Valid @RequestBody UserEntity userEntity) {
@@ -29,22 +31,31 @@ public class UserController {
 
     @GetMapping(GET_ONE_USER)
     public UserDto getOne(@PathVariable Long id){
-        return userService.getOne(id);
+        return userService.getByIdUser(id);
     }
 
     @GetMapping(GET_ALL_USER)
     public List<UserDto> getUser(){
-        return userService.getUser();
+        return userService.getUsers();
     }
 
     @PutMapping(UPDATE_USER)
     public UserDto update(@PathVariable Long id,
                           @Valid @RequestBody UserEntity username){
-        return userService.update(id,username);
+        return userService.updateUserById(id,username);
     }
-
+    @GetMapping(FILTER_USERNAME)
+    public List<UserDto> filterUsername(@PathVariable String username){
+        return userService.filterUsername(username);
+    }
     @DeleteMapping(DELETE_USER)
     public DeleteDto deleteUserId(@PathVariable Long id){
         return userService.deleteId(id);
+    }
+
+    @DeleteMapping(DELETE_USER_ALL)
+    public String deleteAllUser(){
+        userService.deleteAll();
+        return "Users deleteAll";
     }
 }
