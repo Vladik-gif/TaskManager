@@ -1,4 +1,4 @@
-package com.vladik.rest.api.config.security;
+package com.vladik.rest.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class PasswordEncoderProvider {
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder();
     }
 }
