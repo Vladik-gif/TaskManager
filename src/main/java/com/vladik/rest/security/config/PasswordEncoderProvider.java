@@ -1,4 +1,4 @@
-package com.vladik.rest.api.config;
+package com.vladik.rest.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
