@@ -35,6 +35,6 @@ logging:
       springframework:
         security: TRACE
 
-#token:
-#  signing:
-#    key: ${JWT_TOKEN}
+token:
+  signing:
+      key: ${JWT_TOKEN}
