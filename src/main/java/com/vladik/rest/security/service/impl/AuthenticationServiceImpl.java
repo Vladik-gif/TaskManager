@@ -4,6 +4,7 @@ import com.vladik.rest.security.models.request.AuthenticationRequest;
 import com.vladik.rest.security.models.request.RegisterRequest;
 import com.vladik.rest.security.models.response.AuthenticationResponse;
 import com.vladik.rest.security.service.AuthenticationService;
+import com.vladik.rest.security.service.JwtService;
 import com.vladik.rest.store.entities.UserEntity;
 import com.vladik.rest.store.enums.RoleEntity;
 import com.vladik.rest.store.repository.UserRepository;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtServiceImpl jwtService;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override
@@ -33,7 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         userRepository.save(userRegister);
 
-        var jwtToken = jwtService.generaleToken(userRegister);
+        var jwtToken = jwtService.generateJwtToken(userRegister);
 
         return AuthenticationResponse
                 .builder()
@@ -52,7 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
 
-        var jwtToken = jwtService.generaleToken(user);
+        var jwtToken = jwtService.generateJwtToken(user);
 
         return AuthenticationResponse
                 .builder()
